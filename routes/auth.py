@@ -13,5 +13,5 @@ async def login(request: Request, body: LoginPayload):
 
 @auth_bp.post("/register")
 @validate(json=RegisterPayload)
-async def register():
+async def register(request: Request, body: RegisterPayload):
     ...

@@ -1,0 +1,8 @@
+.env
+__pycache__/
+session.vim
+pyrightconfig.json
+uv.lock
+.ruff_cache
+.venv
+.python-version
