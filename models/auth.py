@@ -1,10 +1,17 @@
 from dataclasses import dataclass
+from dataclasses_json import dataclass_json
 from typing import Optional
 from pytimeparse2 import parse
 from datetime import datetime, timedelta
 
 DEFAULT_EXPIRY = "7d"
 
+@dataclass_json
+@dataclass
+class User:
+    uid: int
+    username: str
+    password: str
 
 @dataclass
 class LoginPayload:
@@ -25,6 +32,7 @@ class LoginPayload:
 
         except:
             self.expiry = DEFAULT_EXPIRY
+
 
 @dataclass
 class RegisterPayload:
