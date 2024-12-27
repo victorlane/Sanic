@@ -1,9 +1,11 @@
-from routes.main import main_bp
-from routes.auth import auth_bp
-from sanic import Sanic
-from dotenv import load_dotenv
-from database import Turso
 from os import getenv
+
+from dotenv import load_dotenv
+from sanic import Sanic
+
+from database import Turso
+from routes.auth import auth_bp
+from routes.main import main_bp
 
 # To implement:
 # Use Nginx as proxy for access logging, Python's logging is slow

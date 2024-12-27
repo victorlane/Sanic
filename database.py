@@ -1,6 +1,7 @@
+from typing import Optional
+
 import libsql_client
 from libsql_client import Client
-from typing import Optional
 
 
 class Turso:

@@ -1,7 +1,8 @@
+from functools import wraps
+
 import jwt
 from jwt.exceptions import PyJWTError
-from functools import wraps
-from sanic import text, Request
+from sanic import Request
 
 
 def check_token(request: Request) -> bool:
@@ -19,7 +20,7 @@ def check_token(request: Request) -> bool:
         # Log the JWT error
         return False
 
-    except Exception as e:
+    except Exception:
         # Log the unexpected exception
         return False
 

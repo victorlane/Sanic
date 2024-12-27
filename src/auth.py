@@ -10,4 +10,7 @@ def hash_password(password: str) -> bytes:
 
 
 def password_match(password: str, hashed_password: str) -> bool:
-    return bcrypt.checkpw(str2bytes(password), str2bytes(hashed_password))
+    try:
+        return bcrypt.checkpw(str2bytes(password), str2bytes(hashed_password))
+    except:
+        return False

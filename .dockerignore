@@ -6,3 +6,9 @@ uv.lock
 .ruff_cache
 .venv
 .python-version
+.github
+deploy
+README.md
+.git
+.gitignore
+
