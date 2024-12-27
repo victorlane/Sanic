@@ -21,6 +21,8 @@ app.blueprint(auth_bp)
 app.config.KEEP_ALIVE_TIMEOUT = 15  # seconds
 app.config.SECRET = APP_SECRET
 
+turso = Turso(TURSO_URL, TURSO_TOKEN)
+
 # Health endpoint (__health__) is not secured out of the box.
 # https://sanic.dev/en/plugins/sanic-ext/health-monitor.html#getting-started
 # Add some type of route securing (depending on health use-case) in the end host environment
@@ -30,4 +32,4 @@ app.config.SECRET = APP_SECRET
 
 @app.before_server_start
 async def attach_db(app, loop):
-    app.ctx.db = Turso(TURSO_URL, TURSO_TOKEN)
+    app.ctx.db = await turso.get_client()
