@@ -1,0 +1,32 @@
+name: Build and Push Sanic image
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Dockerfile"
+      - "src/*"
+      - "routes/*"
+      - "models/*"
+      - "middleware/*"
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    concurrency: deploy-group
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Auth to Container Registry
+        uses: docker/login-action@v3
+        with:
+            registry: "git.victorbrink.dev"
+            username: "Victor"
+            password: ${{ secrets.PAT }}
+
+      - name: Build Image (Default)
+        run: docker build -t git.victorbrink.dev/victor/sanic-server:latest .
+
+      - name: Push Image (Default)
+        run: docker push git.victorbrink.dev/victor/sanic-server:latest
