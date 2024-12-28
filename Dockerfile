@@ -13,7 +13,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 COPY . /app
 
-RUN uv venv
-RUN uv run pip install . --no-cache-dir
-
+RUN uv venv && uv run pip install . --no-cache-dir
 ENTRYPOINT ["uv", "run", "sanic", "server"]

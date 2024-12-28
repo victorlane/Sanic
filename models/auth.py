@@ -4,6 +4,7 @@ from typing import Optional
 
 from dataclasses_json import dataclass_json
 from pytimeparse2 import parse
+from datetime import datetime, timedelta
 
 DEFAULT_EXPIRY = "7d"
 
@@ -16,25 +17,17 @@ class User:
     password: str
 
 
+@dataclass_json
+@dataclass
+class UserToken(User):
+    expiry: datetime
+
+
 @dataclass
 class LoginPayload:
     username: str
     password: str
-    expiry: Optional[str] | datetime
-
-    def __post_init__(self):
-        if not isinstance(self.expiry, str):
-            self.expiry = DEFAULT_EXPIRY
-
-        try:
-            expirySeconds = parse(self.expiry)
-            if not expirySeconds:
-                raise
-
-            self.expiry = datetime.now() + timedelta(seconds=expirySeconds)
-
-        except:
-            self.expiry = DEFAULT_EXPIRY
+    expiry: str
 
 
 @dataclass
