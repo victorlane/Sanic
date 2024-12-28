@@ -3,7 +3,7 @@ from os import getenv
 from dotenv import load_dotenv
 from sanic import Sanic
 
-from database import Turso
+from src.database import Turso
 from routes.auth import auth_bp
 from routes.main import main_bp
 
