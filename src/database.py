@@ -14,3 +14,5 @@ class Turso:
 
     async def get_client(self) -> Client:
         return libsql_client.create_client(self.url, auth_token=self.token)
+
+

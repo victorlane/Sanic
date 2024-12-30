@@ -3,7 +3,7 @@ from models.auth import DEFAULT_EXPIRY
 from datetime import datetime, timedelta
 from models.main import APIResponse
 from sanic import json
-from sanic.response.convenience.json import JSONResponse
+from sanic.response.types import JSONResponse
 
 
 def successful(

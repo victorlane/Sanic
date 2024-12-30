@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sanic-app
+  labels:
+    app: sanic
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sanic
+  template:
+    metadata:
+      labels:
+        app: sanic
+    spec:
+      containers:
+      - name: sanic
+        image: git.victorbrink.dev/victor/sanic-server:latest
+        ports:
+        - containerPort: 8080
+        args:
+        - "--host=0.0.0.0"
+        - "--port=8080"
+        - "--no-access-log"
+        - "--motd=False"
+        - "--fast"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sanic-service
+spec:
+  selector:
+    app: sanic
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8001
+  type: ClusterIP
+

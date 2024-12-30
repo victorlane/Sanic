@@ -17,7 +17,7 @@ TURSO_URL = getenv("TURSO_URL")
 TURSO_TOKEN = getenv("TURSO_TOKEN")
 APP_SECRET = getenv("APP_SECRET")
 
-app = Sanic("myapi")
+app = Sanic("PyAPI")
 app.blueprint(main_bp)
 app.blueprint(auth_bp)
 app.config.KEEP_ALIVE_TIMEOUT = 15  # seconds

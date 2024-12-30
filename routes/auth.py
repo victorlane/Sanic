@@ -1,9 +1,8 @@
 import jwt
-from sanic import Blueprint, Request, json
+from sanic import Blueprint, Request
 from sanic_ext import validate
 from src.auth import password_match
-from models.auth import LoginPayload, RegisterPayload, UserToken 
-from models.main import APIResponse
+from models.auth import LoginPayload, RegisterPayload, UserToken
 from src.addon import parse_expiry, timestamp_expired, successful, unsuccessful
 
 auth_bp = Blueprint("auth", url_prefix="/auth")
@@ -29,7 +28,7 @@ async def login(request: Request, body: LoginPayload):
         return successful("Login successful", data={"token": token})
 
     except:
-        return unsuccessful("Internal server error", response_code=500) 
+        return unsuccessful("Internal server error", response_code=500)
 
 
 @auth_bp.post("/register")
@@ -37,14 +36,13 @@ async def login(request: Request, body: LoginPayload):
 async def register(request: Request, body: RegisterPayload):
     rtoken_query = await request.app.ctx.db.execute(
         "SELECT id, token, expiry FROM registration_tokens WHERE token = ? LIMIT 1;",
-        [body.registration_token]
+        [body.registration_token],
     )
-    
+
     if len(rtoken_query.rows) == 0:
-       return unsuccessful("Invalid registration token", response_code=404) 
+        return unsuccessful("Invalid registration token", response_code=404)
 
     id, token, expiry = rtoken_query.rows[0]
     if timestamp_expired(expiry):
-        return json(APIResponse(success=False, message=""))
-
-    
+        
+        return unsuccessful("Expired registration token", response_code=404)
