@@ -6,4 +6,4 @@ uv.lock
 .ruff_cache
 .venv
 .python-version
-
+deploy/secrets.yaml
