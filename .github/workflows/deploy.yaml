@@ -5,11 +5,14 @@ on:
     branches:
       - main
     paths:
+      - ".github/workflows/*"
       - "Dockerfile"
       - "src/*"
       - "routes/*"
       - "models/*"
       - "middleware/*"
+      - "server.py"
+      - "database.py"
 jobs:
   deploy:
     name: Deploy app
