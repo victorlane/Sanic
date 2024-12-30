@@ -8,24 +8,25 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
     nginx.ingress.kubernetes.io/connection-proxy-header: "keep-alive"
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      map $remote_addr $for_addr {
-          ~^[0-9.]+$ "for=$remote_addr";         # IPv4 client address
-          ~^[0-9A-Fa-f:.]+$ "for=\"[$remote_addr]\""; # IPv6 bracketed and quoted
-          default "for=unknown";                # Unix socket
-      }
-      proxy_set_header forwarded 'by="_hostname";$for_addr;proto=$scheme;host="$http_host"';
+    #nginx.ingress.kubernetes.io/configuration-snippet: |
+    # map $remote_addr $for_addr {
+    #     ~^[0-9.]+$ "for=$remote_addr";         # IPv4 client address
+    #     ~^[0-9A-Fa-f:.]+$ "for=\"[$remote_addr]\""; # IPv6 bracketed and quoted
+    #     default "for=unknown";                # Unix socket
+    # }
+    # proxy_set_header forwarded 'by="_hostname";$for_addr;proto=$scheme;host="$http_host"';
 spec:
   #tls:
   #- hosts:
   #  - example.com
   #  secretName: sanic-tls
+  ingressClassName: nginx
   rules:
     #- host: example.com
   -  http:
       paths:
       - path: /
-        pathType: ImplementationSpecific
+        pathType: Prefix
         backend:
           service:
             name: sanic-service

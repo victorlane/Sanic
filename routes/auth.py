@@ -23,11 +23,12 @@ async def login(request: Request, body: LoginPayload):
     if not password_match(body.password, user_object[2]):
         return unsuccessful("Login unsuccessful", response_code=404)
     try:
-        user = UserToken(*user_object, expiry=parse_expiry(body.expiry))
+        user = UserToken(*user_object, expiry=parse_expiry(body.expiry).timestamp())
         token = jwt.encode(user.to_dict(), request.app.config.SECRET, algorithm="HS256")
         return successful("Login successful", data={"token": token})
 
-    except:
+    except Exception as e:
+        print(f"Unknown exception occured during login request {e}")
         return unsuccessful("Internal server error", response_code=500)
 
 

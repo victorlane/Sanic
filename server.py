@@ -21,6 +21,9 @@ TURSO_TOKEN = getenv("TURSO_TOKEN")
 APP_SECRET = getenv("APP_SECRET")
 
 app = Sanic("PyAPI")
+#app.config.REQUEST_MAX_SIZE = 10000000 # 1mb
+#app.config.REQUEST_TIMEOUT = 30 # seconds
+
 app.blueprint(main_bp)
 app.blueprint(auth_bp)
 app.config.KEEP_ALIVE_TIMEOUT = 15  # seconds

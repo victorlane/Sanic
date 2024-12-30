@@ -1,10 +1,6 @@
 from dataclasses import dataclass
-from datetime import datetime, timedelta
-from typing import Optional
 
 from dataclasses_json import dataclass_json
-from pytimeparse2 import parse
-from datetime import datetime, timedelta
 
 DEFAULT_EXPIRY = "7d"
 
@@ -20,7 +16,7 @@ class User:
 @dataclass_json
 @dataclass
 class UserToken(User):
-    expiry: datetime
+    expiry: int | float
 
 
 @dataclass
