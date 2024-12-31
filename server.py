@@ -10,6 +10,8 @@ from routes.main import main_bp
 WorkerManager.THRESHOLD = 600 # fix this
 load_dotenv()
 
+app = Sanic("PyAPI")
+
 TURSO_URL = getenv("TURSO_URL")
 TURSO_TOKEN = getenv("TURSO_TOKEN")
 APP_SECRET = getenv("APP_SECRET")
