@@ -40,4 +40,6 @@ turso = Turso(TURSO_URL, TURSO_TOKEN)
 
 @app.before_server_start
 async def attach_db(app, loop):
+    app.config.REQUEST_MAX_SIZE = 10000000 # 1mb
+    app.config.REQUEST_TIMEOUT = 30 # seconds
     app.ctx.db = await turso.get_client()
