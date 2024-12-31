@@ -7,23 +7,14 @@ from sanic.worker.manager import WorkerManager
 from src.database import Turso
 from routes.auth import auth_bp
 from routes.main import main_bp
-
-WorkerManager.THRESHOLD = 600
-
-# To implement:
-# Use Nginx as proxy for access logging, Python's logging is slow
-# run sanic with --no-access-logs flag
-
+WorkerManager.THRESHOLD = 600 # fix this
 load_dotenv()
 
 TURSO_URL = getenv("TURSO_URL")
 TURSO_TOKEN = getenv("TURSO_TOKEN")
 APP_SECRET = getenv("APP_SECRET")
-
-app = Sanic("PyAPI")
-#app.config.REQUEST_MAX_SIZE = 10000000 # 1mb
-#app.config.REQUEST_TIMEOUT = 30 # seconds
-
+app.config.REQUEST_MAX_SIZE = 10000000 # 1mb
+app.config.REQUEST_TIMEOUT = 30 # seconds
 app.blueprint(main_bp)
 app.blueprint(auth_bp)
 app.config.KEEP_ALIVE_TIMEOUT = 15  # seconds
