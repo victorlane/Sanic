@@ -2,7 +2,6 @@
 1. Automatic K8S Deployment
 2. Authenticate to private registry automatically
 3. Load Deploy secrets during build step and apply to cluster
-4. Load secrets via Github workflows for a barebones secrets.yaml file in repo
 
 # IMPORTANT TODO
 *Move Turso client initialization/binding to shared worker context.*
