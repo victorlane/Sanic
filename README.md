@@ -8,6 +8,15 @@
 It's currently created in the  app.before_server_start hook and added to `app.ctx`
 This ***may*** be the culprit of slow startup time (`WorkerManager.THRESHOLD = 600`) if each worker process (10 per pod on current testing env) has to initialize a connection to Turso
 
+# Images
+Docker images are automatically built for [amd64](https://git.victorbrink.dev/Victor/-/packages/container/sanic-server/latest) and [aarch64](https://git.victorbrink.dev/Victor/-/packages/container/sanic-arm/latest)
+
+Get started with x86
+`docker pull git.victorbrink.dev/victor/sanic-server:latest`
+
+Get started with arm
+`docker pull git.victorbrink.dev/victor/sanic-arm:latest`
+
 # Run
 Install uv (`pip install uv`)
 
